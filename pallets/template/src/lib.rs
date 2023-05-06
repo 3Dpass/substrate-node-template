@@ -18,6 +18,7 @@ mod benchmarking;
 pub mod pallet {
 	use frame_support::pallet_prelude::*;
 	use frame_system::pallet_prelude::*;
+	use native_template;
 
 	#[pallet::pallet]
 	pub struct Pallet<T>(_);
@@ -70,6 +71,8 @@ pub mod pallet {
 			// This function will return an error if the extrinsic is not signed.
 			// https://docs.substrate.io/main-docs/build/origins/
 			let who = ensure_signed(origin)?;
+
+			native_template::hashable_object::calc();
 
 			// Update storage.
 			<Something<T>>::put(something);
